@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/green_slime_v1.png-24e4707262785e4db690953a8c283727.stex"
+path="res://.import/1_forest_mid_front.png-10132897639a8f0e085f5ec25c9be2ab.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/player/green_slime_v1.png"
-dest_files=[ "res://.import/green_slime_v1.png-24e4707262785e4db690953a8c283727.stex" ]
+source_file="res://assets/art/bg/1_forest_mid_front.png"
+dest_files=[ "res://.import/1_forest_mid_front.png-10132897639a8f0e085f5ec25c9be2ab.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

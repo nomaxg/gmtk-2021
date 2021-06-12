@@ -41,6 +41,10 @@ func _physics_process(_delta):
 	var is_jump_interrupted = is_jumping and Input.is_action_just_released("jump") and _velocity.y < 0.0
 	_velocity = calculate_move_velocity(_velocity, input_direction, speed, is_jump_interrupted)
 
+	# Slightly raise the slime when jumping so that it can jump on rising platform
+	if _velocity.y < 0:
+		position.y -= 0.5
+
 	var snap_vector = Vector2.ZERO
 	if not Input.is_action_just_pressed("jump"):
 		snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE

@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://entities/actor/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/platforms/platform.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "move"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 70.934, 86.662 ), Vector2( 150.934, 86.662 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "move"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -220.597, 169.034 ), Vector2( -220.597, 100.034 ) ]
+}
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 535.43, 171.053 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -372.456, -94.8472 )
+
+[node name="PlatformStatic" parent="." instance=ExtResource( 2 )]
+position = Vector2( -361.237, -12.0127 )
+
+[node name="Platform2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 85.5699, 86.662 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform2"]
+autoplay = "move"
+playback_process_mode = 0
+anims/move = SubResource( 1 )
+
+[node name="Platform1" parent="." instance=ExtResource( 2 )]
+position = Vector2( -220.597, 130.606 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform1"]
+autoplay = "move"
+anims/move = SubResource( 2 )

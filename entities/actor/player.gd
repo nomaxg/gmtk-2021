@@ -4,6 +4,10 @@ extends Actor
 # var a = 2
 # var b = "text"
 
+signal IS_DEAD
+
+export var origin := Vector2(0.0, 0.0)
+
 const COYOTE_TIME = 0.1
 
 onready var FLOOR_DETECT_DISTANCE = $PlatformDetector.cast_to.y
@@ -19,7 +23,8 @@ var airborne: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	#connects signal to handler
+	var _error = self.connect("IS_DEAD", self, "on_death")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -58,6 +63,13 @@ func _physics_process(_delta):
 	_velocity = move_and_slide_with_snap(
 		_velocity, snap_vector, FLOOR_NORMAL, not platform_detector.is_colliding(), 4, 0.9, false
 	)
+	
+	#checks all collisions for if any are hazards
+	#if a hazard is found, send death signal
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.name.begins_with("Hazard"):
+			emit_signal("IS_DEAD")
 
 	# When the character’s direction changes, we want to to scale the Sprite accordingly to flip it.
 	# This will make Robi face left or right depending on the direction you move.
@@ -110,3 +122,6 @@ func get_new_animation() -> String:
 		else:
 			animation_new = "jumping"
 	return animation_new
+
+func on_death() -> void:
+	self.set_position(origin)

@@ -17,20 +17,20 @@ position = Vector2( 656.209, 548.222 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Platform1" type="StaticBody2D" parent="."]
 collision_layer = 2
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
 position = Vector2( 0.51059, 78.3885 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+[node name="Sprite" type="Sprite" parent="Platform1"]
 position = Vector2( 1.09027, 66.9241 )
 scale = Vector2( 0.197103, 82.4253 )
 texture = SubResource( 3 )
 
-[node name="Area2D" type="StaticBody2D" parent="."]
+[node name="Platform2" type="StaticBody2D" parent="."]
 position = Vector2( 415.661, 119.755 )
 collision_layer = 2
 collision_mask = 3
@@ -38,11 +38,29 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
 position = Vector2( 0.51059, 78.3885 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="Area2D"]
+[node name="Sprite" type="Sprite" parent="Platform2"]
 position = Vector2( -0.529739, 71.4139 )
 scale = Vector2( 0.195034, 82.4253 )
+texture = SubResource( 3 )
+
+[node name="Hazard1" type="StaticBody2D" parent="."]
+position = Vector2( 180.46, 496.924 )
+collision_layer = 2
+collision_mask = 3
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard1"]
+position = Vector2( 0.51059, 78.3885 )
+scale = Vector2( 6, 1 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Hazard1"]
+position = Vector2( -0.529739, 71.4139 )
+scale = Vector2( 1.15, 82.425 )
 texture = SubResource( 3 )

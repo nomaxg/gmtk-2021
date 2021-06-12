@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/green_slime_v1.png-24e4707262785e4db690953a8c283727.stex"
+path="res://.import/forest_tiles.png-cd83c4e9fd5300c16c4903653949f13b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/player/green_slime_v1.png"
-dest_files=[ "res://.import/green_slime_v1.png-24e4707262785e4db690953a8c283727.stex" ]
+source_file="res://assets/art/tileset/forest_tiles.png"
+dest_files=[ "res://.import/forest_tiles.png-cd83c4e9fd5300c16c4903653949f13b.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

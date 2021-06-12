@@ -47,6 +47,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( -3.31744, -1.99045 )
 z_index = 1
 script = ExtResource( 2 )
 __meta__ = {
@@ -98,3 +99,16 @@ region_rect = Rect2( 584.58, 101.432, 49.3323, 102.459 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="LeftWallCast" type="RayCast2D" parent="."]
+position = Vector2( 0, -10 )
+enabled = true
+cast_to = Vector2( -50, 0 )
+
+[node name="RightWallCast" type="RayCast2D" parent="."]
+position = Vector2( 0, -10 )
+enabled = true
+cast_to = Vector2( 50, 0 )

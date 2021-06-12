@@ -10,8 +10,10 @@ onready var FLOOR_DETECT_DISTANCE = $PlatformDetector.cast_to.y
 
 onready var platform_detector = $PlatformDetector
 onready var animation_player = $AnimationPlayer
-onready var sprite = $Sprite
+onready var sprite = $SpriteContainer/Sprite
+onready var bounce_detector = $BounceDetector
 
+var queue_jump = false
 var is_jumping = false
 var airborne: float = 0.0
 
@@ -33,10 +35,15 @@ func _physics_process(_delta):
 	else:
 		airborne += _delta
 	
+	if bounce_detector.is_colliding() and Input.is_action_just_pressed("jump"):
+		queue_jump = true
+	
 	if can_jump():
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_pressed("jump"):
 			_velocity.y = -speed.y
 			is_jumping = true
+			queue_jump = false
+			Input.action_press("jump")
 
 	var is_jump_interrupted = is_jumping and Input.is_action_just_released("jump") and _velocity.y < 0.0
 	_velocity = calculate_move_velocity(_velocity, input_direction, speed, is_jump_interrupted)
@@ -46,24 +53,23 @@ func _physics_process(_delta):
 		position.y -= 0.5
 
 	var snap_vector = Vector2.ZERO
-	if not Input.is_action_just_pressed("jump"):
+	if not (Input.is_action_just_pressed("jump") or queue_jump):
 		snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE
-	var is_on_platform = platform_detector.is_colliding()
 	_velocity = move_and_slide_with_snap(
-		_velocity, snap_vector, FLOOR_NORMAL, not is_on_platform, 4, 0.9, false
+		_velocity, snap_vector, FLOOR_NORMAL, not platform_detector.is_colliding(), 4, 0.9, false
 	)
 
 	# When the character’s direction changes, we want to to scale the Sprite accordingly to flip it.
 	# This will make Robi face left or right depending on the direction you move.
 	if input_direction != 0:
 		if input_direction > 0:
-			sprite.scale.x = -abs(sprite.scale.x)
+			sprite.flip_h = false
 		else:
-			sprite.scale.x = abs(sprite.scale.x)
+			sprite.flip_h = true
 
-	#var animation = get_new_animation()
-	#if animation != animation_player.current_animation:
-	#	animation_player.play(animation)
+	var animation = get_new_animation()
+	if animation != animation_player.current_animation:
+		animation_player.play(animation)
 
 
 func can_jump():
@@ -95,7 +101,7 @@ func get_new_animation() -> String:
 	var animation_new = ""
 	if is_on_floor():
 		if abs(_velocity.x) > 0.1:
-			animation_new = "run"
+			animation_new = "walk"
 		else:
 			animation_new = "idle"
 	else:

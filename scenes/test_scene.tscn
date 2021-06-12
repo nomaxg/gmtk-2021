@@ -1,7 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/actor/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://entities/platforms/platform.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 201.921, 50 )
@@ -10,28 +9,13 @@ extents = Vector2( 201.921, 50 )
 offsets = PoolRealArray(  )
 colors = PoolColorArray(  )
 
-[sub_resource type="Animation" id=2]
-resource_name = "move"
-length = 3.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( -220.597, 169.034 ), Vector2( -220.597, 100.034 ) ]
-}
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 656.209, 548.222 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -372.456, -94.8472 )
 
 [node name="Area2D" type="StaticBody2D" parent="."]
 collision_layer = 2

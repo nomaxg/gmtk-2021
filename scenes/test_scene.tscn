@@ -2,8 +2,8 @@
 
 [ext_resource path="res://entities/actor/player.tscn" type="PackedScene" id=1]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 50, 50 )
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 201.921, 50 )
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray(  )
@@ -13,7 +13,7 @@ colors = PoolColorArray(  )
 gradient = SubResource( 2 )
 
 [node name="Node2D" type="Node2D"]
-position = Vector2( 535.43, 171.053 )
+position = Vector2( 656.209, 548.222 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
@@ -23,15 +23,15 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0.51059, 78.3885 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
-position = Vector2( 0.560547, 66.9241 )
-scale = Vector2( 0.0444946, 82.4253 )
+position = Vector2( 1.09027, 66.9241 )
+scale = Vector2( 0.197103, 82.4253 )
 texture = SubResource( 3 )
 
 [node name="Area2D2" type="StaticBody2D" parent="."]
-position = Vector2( 145.498, 126.112 )
+position = Vector2( 415.661, 119.755 )
 collision_layer = 2
 collision_mask = 3
 __meta__ = {
@@ -40,9 +40,9 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2( 0.51059, 78.3885 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Area2D2"]
-position = Vector2( 0, 71.4139 )
-scale = Vector2( 0.0444946, 82.4253 )
+position = Vector2( -0.529739, 71.4139 )
+scale = Vector2( 0.195034, 82.4253 )
 texture = SubResource( 3 )

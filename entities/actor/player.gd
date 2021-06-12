@@ -4,11 +4,16 @@ extends Actor
 # var a = 2
 # var b = "text"
 
-const FLOOR_DETECT_DISTANCE = 20.0
+const COYOTE_TIME = 0.1
+
+onready var FLOOR_DETECT_DISTANCE = $PlatformDetector.cast_to.y
 
 onready var platform_detector = $PlatformDetector
 onready var animation_player = $AnimationPlayer
 onready var sprite = $Sprite
+
+var is_jumping = false
+var airborne: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,13 +25,24 @@ func _ready():
 
 
 func _physics_process(_delta):
-	var direction = get_direction()
+	var input_direction: float = get_direction()
+	
+	if is_on_floor():
+		airborne = 0
+		is_jumping = false
+	else:
+		airborne += _delta
+	
+	if can_jump():
+		if Input.is_action_just_pressed("jump"):
+			_velocity.y = -speed.y
+			is_jumping = true
 
-	var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
-	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
+	var is_jump_interrupted = is_jumping and Input.is_action_just_released("jump") and _velocity.y < 0.0
+	_velocity = calculate_move_velocity(_velocity, input_direction, speed, is_jump_interrupted)
 
 	var snap_vector = Vector2.ZERO
-	if direction.y == 0.0:
+	if not Input.is_action_just_pressed("jump"):
 		snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE
 	var is_on_platform = platform_detector.is_colliding()
 	_velocity = move_and_slide_with_snap(
@@ -35,8 +51,8 @@ func _physics_process(_delta):
 
 	# When the character’s direction changes, we want to to scale the Sprite accordingly to flip it.
 	# This will make Robi face left or right depending on the direction you move.
-	if direction.x != 0:
-		if direction.x > 0:
+	if input_direction != 0:
+		if input_direction > 0:
 			sprite.scale.x = -abs(sprite.scale.x)
 		else:
 			sprite.scale.x = abs(sprite.scale.x)
@@ -46,16 +62,17 @@ func _physics_process(_delta):
 	#	animation_player.play(animation)
 
 
+func can_jump():
+	return is_on_floor() or (airborne < COYOTE_TIME and not is_jumping)
+
 func calculate_move_velocity(
-		linear_velocity,
+		linear_velocity: Vector2,
 		direction,
 		speed,
 		is_jump_interrupted
 	) -> Vector2:
 	var velocity = linear_velocity
-	velocity.x = speed.x * direction.x
-	if direction.y != 0.0:
-		velocity.y = speed.y * direction.y
+	velocity.x = speed.x * direction
 	if is_jump_interrupted:
 		# Decrease the Y velocity by multiplying it, but don't set it to 0
 		# as to not be too abrupt.
@@ -63,11 +80,12 @@ func calculate_move_velocity(
 	return velocity
 
 
-func get_direction() -> Vector2:
-	return Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		-1 if is_on_floor() and Input.is_action_just_pressed("jump") else 0
-	)
+func get_direction() -> float:
+	return Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+#	return Vector2(
+#		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+#		-1 if is_on_floor() and Input.is_action_just_pressed("jump") else 0
+#	)
 
 func get_new_animation() -> String:
 	var animation_new = ""

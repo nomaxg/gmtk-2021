@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/art/tileset/forest_tiles.png" type="Texture" id=1]
 [ext_resource path="res://entities/actor/player.tscn" type="PackedScene" id=2]
@@ -140,6 +140,32 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 0/z_index = 0
 
+[sub_resource type="TileSet" id=14]
+0/name = "forest_tiles.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 576, 192 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 64, 64 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 64, 32 )
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
@@ -154,10 +180,10 @@ drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Solid Forest Tiles" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
 format = 1
-tile_data = PoolIntArray( 786438, 0, 65543, 786439, 0, 65544, 917504, 0, 1, 917505, 0, 2, 917506, 0, 2, 917507, 0, 2, 917508, 0, 2, 917509, 0, 2, 917510, 0, 2, 917511, 0, 2, 917512, 0, 2, 917513, 0, 2, 917514, 0, 2, 917515, 0, 2, 917516, 0, 2, 917517, 0, 2, 917518, 0, 2, 917519, 0, 2, 917520, 0, 2, 917521, 0, 2, 917522, 0, 2, 917523, 0, 2, 917524, 0, 2, 917525, 0, 2, 917526, 0, 2, 917527, 0, 2, 917528, 0, 2, 917529, 0, 2, 917530, 0, 2, 917531, 0, 2, 917532, 0, 2, 917533, 0, 2, 917534, 0, 2, 917535, 0, 2, 983040, 0, 0, 983041, 0, 65536, 983042, 0, 131072, 983043, 0, 131072, 983044, 0, 131073 )
+tile_data = PoolIntArray( 917504, 0, 1, 917505, 0, 2, 917506, 0, 2, 917507, 0, 2, 917508, 0, 2, 917509, 0, 2, 917510, 0, 2, 917511, 0, 2, 917512, 0, 2, 917513, 0, 2, 917514, 0, 2, 917515, 0, 2, 917516, 0, 2, 917517, 0, 2, 917518, 0, 2, 917519, 0, 2, 917520, 0, 2, 917521, 0, 2, 917522, 0, 2, 917523, 0, 2, 917524, 0, 2, 917525, 0, 2, 917526, 0, 2, 917527, 0, 2, 917528, 0, 2, 917529, 0, 2, 917530, 0, 2, 917531, 0, 2, 917532, 0, 2, 917533, 0, 2, 917534, 0, 2, 917535, 0, 2, 983040, 0, 0, 983041, 0, 65536, 983042, 0, 131072, 983043, 0, 131072, 983044, 0, 131073 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -213,3 +239,15 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/forest_front"]
 texture = ExtResource( 7 )
+
+[node name="Forest Tiles" type="TileMap" parent="."]
+tile_set = SubResource( 14 )
+format = 1
+tile_data = PoolIntArray( 786435, 0, 65543, 786436, 0, 65544 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Forest Tiles"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Forest Tiles/StaticBody2D"]
+position = Vector2( 256, 800 )
+shape = SubResource( 15 )
+one_way_collision = true

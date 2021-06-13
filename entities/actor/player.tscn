@@ -3,14 +3,14 @@
 [ext_resource path="res://assets/art/player/green_slime_walk_right_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://entities/actor/player.gd" type="Script" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=8]
 radius = 15.0
-height = 25.0
 
 [sub_resource type="Animation" id=4]
-resource_name = "falling"
+resource_name = "jumping"
+length = 0.7
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=5]
 resource_name = "idle"
 length = 0.1
 tracks/0/type = "value"
@@ -26,11 +26,10 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "jumping"
+[sub_resource type="Animation" id=6]
 length = 0.7
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=7]
 resource_name = "walk"
 length = 0.1
 tracks/0/type = "value"
@@ -52,11 +51,14 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+wall_climb = Vector2( 50, 700 )
+wall_pop = Vector2( 200, 700 )
+wall_leap = Vector2( 300, 700 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -15 )
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -72,9 +74,9 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/falling = SubResource( 4 )
-anims/idle = SubResource( 2 )
-anims/jumping = SubResource( 5 )
-anims/walk = SubResource( 3 )
+anims/idle = SubResource( 5 )
+anims/jumping = SubResource( 6 )
+anims/walk = SubResource( 7 )
 
 [node name="BounceDetector" type="RayCast2D" parent="."]
 enabled = true
@@ -98,3 +100,13 @@ region_rect = Rect2( 584.58, 101.432, 49.3323, 102.459 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="LeftWallCast" type="RayCast2D" parent="."]
+position = Vector2( 0, -10 )
+enabled = true
+cast_to = Vector2( -30, 0 )
+
+[node name="RightWallCast" type="RayCast2D" parent="."]
+position = Vector2( 0, -10 )
+enabled = true
+cast_to = Vector2( 30, 0 )

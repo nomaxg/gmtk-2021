@@ -1,12 +1,13 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://assets/art/tileset/forest_tiles.png" type="Texture" id=1]
-[ext_resource path="res://entities/actor/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/art/bg/4_sky.png" type="Texture" id=3]
-[ext_resource path="res://assets/art/bg/3_forest_back.png" type="Texture" id=4]
-[ext_resource path="res://assets/art/bg/2_forest_mid_back.png" type="Texture" id=5]
-[ext_resource path="res://assets/art/bg/1_forest_mid_front.png" type="Texture" id=6]
-[ext_resource path="res://assets/art/bg/0_forest_front.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/bg/3_forest_back.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/bg/2_forest_mid_back.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/bg/1_forest_mid_front.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/bg/0_forest_front.png" type="Texture" id=4]
+[ext_resource path="res://entities/actor/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/art/tileset/forest_tiles.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/bg/4_sky.png" type="Texture" id=7]
+[ext_resource path="res://entities/wall/wall.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -46,7 +47,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 
 [sub_resource type="TileSet" id=13]
 0/name = "forest_tiles.png 0"
-0/texture = ExtResource( 1 )
+0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 576, 192 )
@@ -142,7 +143,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 
 [sub_resource type="TileSet" id=14]
 0/name = "forest_tiles.png 0"
-0/texture = ExtResource( 1 )
+0/texture = ExtResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 576, 192 )
@@ -166,9 +167,9 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 [sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 64, 32 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 32, 800 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -193,7 +194,7 @@ motion_mirroring = Vector2( 2048, 1024 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/Sky"]
 position = Vector2( 0, -16 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
 centered = false
 
 [node name="forest_back" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -205,7 +206,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/forest_back"]
-texture = ExtResource( 4 )
+texture = ExtResource( 1 )
 
 [node name="forest_mid_back" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2( 1032, 392 )
@@ -216,7 +217,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/forest_mid_back"]
-texture = ExtResource( 5 )
+texture = ExtResource( 2 )
 
 [node name="forest_mid_front" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2( 1024, 400 )
@@ -227,7 +228,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/forest_mid_front"]
-texture = ExtResource( 6 )
+texture = ExtResource( 3 )
 
 [node name="forest_front" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2( 1056, 400 )
@@ -238,7 +239,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/forest_front"]
-texture = ExtResource( 7 )
+texture = ExtResource( 4 )
 
 [node name="Forest Tiles" type="TileMap" parent="."]
 tile_set = SubResource( 14 )
@@ -251,3 +252,27 @@ tile_data = PoolIntArray( 786435, 0, 65543, 786436, 0, 65544 )
 position = Vector2( 256, 800 )
 shape = SubResource( 15 )
 one_way_collision = true
+
+[node name="StaticBody2D" parent="." instance=ExtResource( 8 )]
+position = Vector2( 722.668, 798.777 )
+
+[node name="StaticBody2D2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 722.668, 609.612 )
+
+[node name="StaticBody2D3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 722.668, 418.97 )
+
+[node name="StaticBody2D4" parent="." instance=ExtResource( 8 )]
+position = Vector2( 527.592, 413.797 )
+
+[node name="StaticBody2D7" parent="." instance=ExtResource( 8 )]
+position = Vector2( 527.592, 224.633 )
+
+[node name="StaticBody2D8" parent="." instance=ExtResource( 8 )]
+position = Vector2( 722.668, 229.066 )
+
+[node name="StaticBody2D5" parent="." instance=ExtResource( 8 )]
+position = Vector2( 526.853, 605.918 )
+
+[node name="StaticBody2D6" parent="." instance=ExtResource( 8 )]
+position = Vector2( 526.853, 605.918 )

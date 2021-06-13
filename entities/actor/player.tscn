@@ -7,11 +7,10 @@
 radius = 15.0
 height = 25.0
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "falling"
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle"
+[sub_resource type="Animation" id=3]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
@@ -26,12 +25,11 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "jumping"
 length = 0.7
 
-[sub_resource type="Animation" id=3]
-resource_name = "walk"
+[sub_resource type="Animation" id=5]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
@@ -71,10 +69,10 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/falling = SubResource( 4 )
-anims/idle = SubResource( 2 )
-anims/jumping = SubResource( 5 )
-anims/walk = SubResource( 3 )
+anims/falling = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/jumping = SubResource( 4 )
+anims/walk = SubResource( 5 )
 
 [node name="BounceDetector" type="RayCast2D" parent="."]
 enabled = true

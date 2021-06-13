@@ -62,7 +62,7 @@ func _physics_process(_delta):
 	
 	if can_jump():
 		if Input.is_action_pressed("jump"):
-			if _wall_touched() != Wall.NONE && Input.is_action_just_pressed("jump):
+			if _wall_touched() != Wall.NONE && Input.is_action_just_pressed("jump"):
 				wall_jumped_off = _wall_touched()
 			_velocity.y = -speed.y
 			
@@ -72,7 +72,6 @@ func _physics_process(_delta):
 
 	var is_jump_interrupted = is_jumping and Input.is_action_just_released("jump") and _velocity.y < 0.0
 	_velocity = calculate_move_velocity(_velocity, input_direction, speed, is_jump_interrupted, wall_jumped_off)
-	print(_velocity)
 	
 	# Slightly raise the slime when jumping so that it can jump on rising platform
 	if _velocity.y < 0:

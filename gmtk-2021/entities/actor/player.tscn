@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/art/player/slime_spritesheet_v2.png" type="Texture" id=1]
+[ext_resource path="res://entities/actor/player.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 15.0
+height = 25.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "falling"
+
+[sub_resource type="Animation" id=3]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "jumping"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpriteContainer/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
+
+[node name="Player" type="KinematicBody2D"]
+z_index = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -15 )
+rotation = 1.5708
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlatformDetector" type="RayCast2D" parent="."]
+position = Vector2( 0, -15 )
+enabled = true
+cast_to = Vector2( 0, 15 )
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/falling = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/jumping = SubResource( 4 )
+anims/walk = SubResource( 5 )
+
+[node name="BounceDetector" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SpriteContainer" type="Node2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="SpriteContainer"]
+position = Vector2( 0, -19 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 1 )
+hframes = 8
+vframes = 3
+frame = 16
+region_rect = Rect2( 584.58, 101.432, 49.3323, 102.459 )
+__meta__ = {
+"_edit_lock_": true
+}

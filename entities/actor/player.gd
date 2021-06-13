@@ -6,7 +6,7 @@ extends Actor
 
 const COYOTE_TIME = 0.1
 const WALL_IMPULSE = 3000
-const WALL_FRICTION = 0.1
+const MIN_SLIDE_VELOCITY = 20
 
 onready var FLOOR_DETECT_DISTANCE = $PlatformDetector.cast_to.y
 
@@ -50,7 +50,6 @@ func _is_touching_wall():
 func _physics_process(_delta):
 	var input_direction: float = get_direction()
 	var wall_jumped_off = Wall.NONE
-	gravity = default_gravity
 
 	if is_on_floor():
 		airborne = 0
@@ -80,9 +79,8 @@ func _physics_process(_delta):
 		position.y -= 0.5
 		
 	# Add friction when sliding down a wall
-	if _is_touching_wall() && _velocity.y > 0:
-		print("APPLY FRICTION")
-		gravity *= WALL_FRICTION
+	if _is_touching_wall():
+		_velocity.y = min(_velocity.y, MIN_SLIDE_VELOCITY)
 
 	var snap_vector = Vector2.ZERO
 	if not (Input.is_action_just_pressed("jump") or queue_jump):

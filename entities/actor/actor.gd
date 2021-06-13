@@ -6,8 +6,7 @@ extends KinematicBody2D
 
 
 export var speed = Vector2(300.0, 700.0)
-onready var default_gravity = ProjectSettings.get("physics/2d/default_gravity")
-onready var gravity = default_gravity
+onready var gravity = ProjectSettings.get("physics/2d/default_gravity")
 
 const FLOOR_NORMAL = Vector2.UP
 

@@ -190,7 +190,7 @@ script = ExtResource( 8 )
 tile_set = SubResource( 13 )
 collision_layer = 2
 format = 1
-tile_data = PoolIntArray( 524292, 0, 2, 524296, 0, 2, 589828, 0, 2, 589832, 0, 2, 655364, 0, 2, 655368, 0, 2, 720900, 0, 2, 917504, 0, 1, 917505, 0, 2, 917506, 0, 2, 917507, 0, 2, 917508, 0, 2, 917509, 0, 2, 917510, 0, 2, 917511, 0, 2, 917512, 0, 2, 917513, 0, 2, 917514, 0, 2, 917515, 0, 2, 917516, 0, 2, 917517, 0, 2, 917518, 0, 2, 917519, 0, 2, 917520, 0, 2, 917521, 0, 2, 917522, 0, 2, 917523, 0, 2, 917524, 0, 2, 917525, 0, 2, 917526, 0, 2, 917527, 0, 2, 917528, 0, 2, 917529, 0, 2, 917530, 0, 2, 917531, 0, 2, 917532, 0, 2, 917533, 0, 2, 917534, 0, 2, 917535, 0, 2, 917536, 0, 2, 917537, 0, 2, 917538, 0, 2, 917539, 0, 2, 917540, 0, 2, 917541, 0, 2, 917542, 0, 2, 917543, 0, 2, 917544, 0, 2, 917545, 0, 2, 917546, 0, 2, 917547, 0, 2, 917548, 0, 2, 917549, 0, 2, 917550, 0, 2, 917551, 0, 2, 917552, 0, 2, 917553, 0, 2, 917554, 0, 2, 917555, 0, 2, 917556, 0, 2, 917557, 0, 2, 983040, 0, 0, 983041, 0, 65536, 983042, 0, 131072, 983043, 0, 131072, 983044, 0, 131073 )
+tile_data = PoolIntArray( 524292, 0, 2, 524296, 0, 2, 589828, 0, 2, 589832, 0, 2, 655364, 0, 2, 655368, 0, 2, 720900, 0, 2, 917504, 0, 1, 917505, 0, 2, 917506, 0, 2, 917507, 0, 2, 917508, 0, 2, 917509, 0, 2, 917510, 0, 2, 917511, 0, 2, 917512, 0, 2, 917515, 0, 2, 917516, 0, 2, 917517, 0, 2, 917518, 0, 2, 917519, 0, 2, 917520, 0, 2, 917521, 0, 2, 917522, 0, 2, 917523, 0, 2, 917524, 0, 2, 917525, 0, 2, 917526, 0, 2, 917527, 0, 2, 917528, 0, 2, 917529, 0, 2, 917530, 0, 2, 917531, 0, 2, 917532, 0, 2, 917533, 0, 2, 917534, 0, 2, 917535, 0, 2, 917536, 0, 2, 917537, 0, 2, 917538, 0, 2, 917539, 0, 2, 917540, 0, 2, 917541, 0, 2, 917542, 0, 2, 917543, 0, 2, 917544, 0, 2, 917545, 0, 2, 917546, 0, 2, 917547, 0, 2, 917548, 0, 2, 917549, 0, 2, 917550, 0, 2, 917551, 0, 2, 917552, 0, 2, 917553, 0, 2, 917554, 0, 2, 917555, 0, 2, 917556, 0, 2, 917557, 0, 2, 1179657, 0, 2, 1179658, 0, 2 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -204,7 +204,7 @@ texture = ExtResource( 3 )
 centered = false
 
 [node name="forest_back" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2( 1016, 392 )
+position = Vector2( 1024, 392 )
 motion_scale = Vector2( 0.3, 1 )
 motion_mirroring = Vector2( 2048, 0 )
 __meta__ = {
@@ -215,7 +215,7 @@ __meta__ = {
 texture = ExtResource( 4 )
 
 [node name="forest_mid_back" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2( 1032, 392 )
+position = Vector2( 1024, 392 )
 motion_scale = Vector2( 0.5, 1 )
 motion_mirroring = Vector2( 2048, 0 )
 __meta__ = {
@@ -237,7 +237,7 @@ __meta__ = {
 texture = ExtResource( 6 )
 
 [node name="forest_front" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2( 1056, 400 )
+position = Vector2( 1024, 400 )
 motion_scale = Vector2( 0.9, 1 )
 motion_mirroring = Vector2( 2048, 0 )
 __meta__ = {
@@ -263,12 +263,17 @@ one_way_collision = true
 [node name="Camera Zones" type="Node" parent="."]
 
 [node name="CameraZone" parent="Camera Zones" instance=ExtResource( 9 )]
-position = Vector2( 768, 424 )
+position = Vector2( 768, 416 )
 scale = Vector2( 24, 17 )
 
 [node name="CameraZone2" parent="Camera Zones" instance=ExtResource( 9 )]
 position = Vector2( 2504, 416 )
 scale = Vector2( 30, 17 )
 
+[node name="CameraZone3" parent="Camera Zones" instance=ExtResource( 9 )]
+position = Vector2( 768, 1504 )
+scale = Vector2( 24, 17 )
+
 [connection signal="camera_zone_enter" from="Camera Zones/CameraZone" to="Player/Camera2D" method="_on_CameraZone_camera_zone_enter"]
 [connection signal="camera_zone_enter" from="Camera Zones/CameraZone2" to="Player/Camera2D" method="_on_CameraZone_camera_zone_enter"]
+[connection signal="camera_zone_enter" from="Camera Zones/CameraZone3" to="Player/Camera2D" method="_on_CameraZone_camera_zone_enter"]

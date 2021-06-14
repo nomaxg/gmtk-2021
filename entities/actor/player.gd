@@ -44,7 +44,7 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func wall_touched() -> int:			
+func wall_touched() -> int:
 	if left_wall_cast.is_colliding():
 		return Wall.LEFT
 	elif right_wall_cast.is_colliding():
@@ -67,13 +67,9 @@ func _physics_process(_delta):
 		_velocity, snap_vector, FLOOR_NORMAL, not platform_detector.is_colliding(), 4, 0.9, false
 	)
 #
-	if input_direction != 0:
-		if input_direction > 0:
-			sprite.flip_h = false
-		else:
-			sprite.flip_h = true
+
 #
-	var animation = get_new_animation()
+	var animation = get_new_animation(input_direction)
 	if animation != animation_player.current_animation:
 		animation_player.play(animation)
 
@@ -172,13 +168,22 @@ func get_direction() -> float:
 #		-1 if is_on_floor() and Input.is_action_just_pressed("jump") else 0
 #	)
 
-func get_new_animation() -> String:
+func get_new_animation(input_direction: float) -> String:
+	if input_direction != 0:
+		if input_direction > 0:
+			sprite.flip_h = false
+		else:
+			sprite.flip_h = true
+
 	var animation_new = ""
 	if is_on_floor():
 		if abs(_velocity.x) > 0.1:
 			animation_new = "walk"
 		else:
 			animation_new = "idle"
+	elif wall_sliding:
+		animation_new = "wallslide"
+		sprite.flip_h = wall_touched() == Wall.RIGHT
 	else:
 		if _velocity.y > 0:
 			animation_new = "falling"
